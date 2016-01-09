@@ -6,5 +6,10 @@ nnvm is a library for compilers. It takes a SSA representation of a program, val
 go get github.com/MovingtoMars/nnvm/...
 ```
 
+# Status
+ - float operations are unsupported
+ - struct operations are unsupported
+ - function calling on Unix-like platforms is poorly supported
+
 # License
 nnvm is licensed under the LGPL v3.0.
