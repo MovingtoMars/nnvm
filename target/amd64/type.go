@@ -61,7 +61,7 @@ func newStructLayout(typ *types.Struct) structLayout {
 	maxAlign := 0
 
 	for i, field := range typ.Fields() {
-		fieldsz := TypeSizeInBits(field)
+		fieldsz := TypeStoreSizeInBits(field)
 		fieldAlign := TypeAlignmentInBits(field)
 
 		if fieldAlign > maxAlign {
@@ -92,6 +92,16 @@ func newStructLayout(typ *types.Struct) structLayout {
 func (v structLayout) hasUnalignedFields() bool {
 	// TODO: packed
 	return false
+}
+
+func (v structLayout) fieldOffsetBits(index int) int {
+	bits := 0
+
+	for _, field := range v.fields[:index] {
+		bits += field.paddingBits + TypeStoreSizeInBits(field.field)
+	}
+
+	return bits
 }
 
 func (v structLayout) String() string {

@@ -76,6 +76,12 @@ func (v Target) genGEP(a *allocator, instr *ssa.GEP) {
 			v.handleGEPPointerOrArray(a, index, TypeStoreSizeInBits(styp.Element()))
 			typ = styp.Element()
 
+		case *types.Struct:
+			i := index.(*ssa.IntLiteral).LiteralValue().(uint64)
+			v.wop("addq $%d, #rax", newStructLayout(styp).fieldOffsetBits(int(i))/8)
+
+			typ = styp.Fields()[i]
+
 		default:
 			panic("unim")
 		}
