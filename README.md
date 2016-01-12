@@ -8,7 +8,6 @@ go get github.com/MovingtoMars/nnvm/...
 
 # Status
  - float operations are unsupported
- - struct operations are unsupported
  - function calling on Unix-like platforms is poorly supported
 
 # License
