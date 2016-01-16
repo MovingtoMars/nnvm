@@ -22,7 +22,6 @@ func test() {
 
 	strLit := ssa.NewStringLiteral("%2d: %lld\n", true)
 	strGlob := mod.NewGlobal(strLit.Type(), ssa.NewLiteralInitialiser(strLit), "str")
-	strPtrGlob := mod.NewGlobal(strGlob.Type(), ssa.NewGlobalPointerInitialiser(strGlob), "strptr")
 
 	failLit := ssa.NewStringLiteral("Please supply number as argument\n", true)
 	failGlob := mod.NewGlobal(failLit.Type(), ssa.NewLiteralInitialiser(failLit), "str")
@@ -76,7 +75,7 @@ func test() {
 
 	builder.CreateCall(printf,
 		[]ssa.Value{
-			builder.CreateConvert(builder.CreateLoad(strPtrGlob, ""), i8ptr, ssa.ConvertBitcast, ""),
+			builder.CreateConvert(strGlob, i8ptr, ssa.ConvertBitcast, ""),
 			add,
 			aphi},
 		"")

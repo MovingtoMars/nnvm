@@ -27,12 +27,6 @@ func checkGlobals(mod *ssa.Module) error {
 				return err
 			}
 
-		case *ssa.GlobalPointerInitialiser:
-			globPtr := types.NewPointer(init.Global().Type())
-			if err := checkMismatchedTypesGlobal(global.Type(), globPtr, global); err != nil {
-				return err
-			}
-
 		case *ssa.ZeroInitialiser:
 			// do nothing
 

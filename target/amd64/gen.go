@@ -193,9 +193,7 @@ func (v Target) genGlobals() {
 func (v Target) genPointerGlobal(global *ssa.Global) {
 	init := global.Initialiser()
 
-	switch init := init.(type) {
-	case *ssa.GlobalPointerInitialiser:
-		v.wop(".quad %s", init.Global().Name())
+	switch init.(type) {
 
 	default:
 		panic("unim")

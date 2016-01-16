@@ -42,26 +42,6 @@ func (_ ZeroInitialiser) String() string {
 	return "zero"
 }
 
-type GlobalPointerInitialiser struct {
-	global *Global
-}
-
-func NewGlobalPointerInitialiser(global *Global) *GlobalPointerInitialiser {
-	return &GlobalPointerInitialiser{
-		global: global,
-	}
-}
-
-func (_ GlobalPointerInitialiser) Initialiser() {}
-
-func (v GlobalPointerInitialiser) String() string {
-	return "globalpointer " + ValueString(v.global)
-}
-
-func (v GlobalPointerInitialiser) Global() *Global {
-	return v.global
-}
-
 type Global struct {
 	ReferenceHandler
 	NameHandler
